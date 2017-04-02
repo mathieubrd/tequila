@@ -7,6 +7,7 @@
 *.cmx
 *.cmxs
 *.cmxa
+*.swp
 
 parser.ml
 parser.mli
