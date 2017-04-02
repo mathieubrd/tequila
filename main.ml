@@ -15,7 +15,7 @@ let lexbuf = Lexing.from_channel stdin in
       try
         let term_type = type_of_term term in
         let term = eval term in
-        print_endline (print_term term ^ " : " ^ print_type term_type)
+        print_endline (string_of_term term ^ " : " ^ string_of_type term_type)
       with Type_error e ->
         print_endline e
     else

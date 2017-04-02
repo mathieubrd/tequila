@@ -31,27 +31,27 @@ let type_of_term term =
         if type_t2 = type_t3 then
           type_t2
         else
-          raise (Type_error (print_type_error type_t3 type_t2))
+          raise (Type_error (string_of_type_error type_t3 type_t2))
       else
-        raise (Type_error (print_type_error type_t1 Bool))
+        raise (Type_error (string_of_type_error type_t1 Bool))
       
     | IsZero t ->
       if aux ctx t = Nat then
         Bool
       else
-        raise (Type_error (print_type_error (aux ctx t) Nat))
+        raise (Type_error (string_of_type_error (aux ctx t) Nat))
 
     | Succ t ->
       if aux ctx t = Nat then
         Nat
       else
-        raise (Type_error (print_type_error (aux ctx t) Nat))
+        raise (Type_error (string_of_type_error (aux ctx t) Nat))
 
     | Pred t ->
       if aux ctx t = Nat then
         Nat
       else
-        raise (Type_error (print_type_error (aux ctx t) Nat))
+        raise (Type_error (string_of_type_error (aux ctx t) Nat))
 
     | Variable (var) ->
       let rec aux ctx =
