@@ -1,7 +1,7 @@
 # Tequila
 A typed λ-calculus interpreter
 
-# Install
+# Installation
 
 Before compiling, ensure you have `ocaml`, `ocamlc`, `ocamllex` and `ocamlyacc` packages.
 
