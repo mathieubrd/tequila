@@ -10,7 +10,7 @@ Compile the project:
 $ make
 ```
 
-# Use
+# Usage
 
 Start the interpreter :
 ```
