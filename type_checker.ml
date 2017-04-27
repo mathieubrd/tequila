@@ -15,7 +15,7 @@ let type_of_term term =
 
     | Zero ->
       Nat
-    
+
     | LetIn (var, t1, t2) ->
       let ctx = (var, (aux ctx t1)) :: ctx in
       aux ctx t2
@@ -34,7 +34,7 @@ let type_of_term term =
           raise (Type_error (string_of_type_error type_t3 type_t2))
       else
         raise (Type_error (string_of_type_error type_t1 Bool))
-      
+
     | IsZero t ->
       if aux ctx t = Nat then
         Bool
@@ -68,9 +68,12 @@ let type_of_term term =
 
     | Application (t1, t2) ->
       let type_t1 = aux ctx t1 in
+      let type_t2 = aux ctx t2 in
       (match type_t1 with
-      | TAbs (t1, t2) -> t2
-      | _             -> raise (Type_error "Type Error"))
+      | TAbs (t11, t12) when t11 = type_t2 ->
+        t12
+      | _                                  ->
+        raise (Type_error (string_of_type_error type_t2 type_t1)))
   in
 
   aux [] term
