@@ -10,6 +10,7 @@ rule lexer = parse
     | "lambda"                 {LAMBDA      }
     | ":"                      {COLON       }
     | "."                      {DOT         }
+    | ";"                      {SEQ         }
     | "("                      {LPAR        }
     | ")"                      {RPAR        }
     | "if"                     {IF          }
@@ -25,4 +26,5 @@ rule lexer = parse
     | "->"                     {ARROW       }
     | ('B'|'b')"ool"           {BOOL        }
     | ('N'|'n')"at"            {NAT         }
-    | ['a'-'z''0'-'9']+ as str {IDENT(str)  } 
+    | ('U'|'u')"nit"           {UNIT        }
+    | ['a'-'z''0'-'9']+ as str {IDENT(str)  }

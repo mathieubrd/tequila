@@ -12,6 +12,7 @@
 %token          IN
 %token          EQUAL
 %token          ARROW
+%token          SEQ
 %token          LPAR
 %token          RPAR
 %token          IF
@@ -19,10 +20,12 @@
 %token          ELSE
 %token          TRUE
 %token          FALSE
+%token          UNIT
 %token          ZERO
 %token          SUCC
 %token          PRED
 %token          ISZERO
+%token          UNIT
 %token          BOOL
 %token          NAT
 
@@ -39,7 +42,12 @@ main:
 term:
     funcTerm           {$1                  }
     | appTerm funcTerm {Application ($1, $2)}
+    | seq {$1}
 ;
+
+seq:
+    term               {$1          }
+    | seq SEQ funcTerm {Seq ($1, $3)}
 
 appTerm:
     elemTerm           {$1                  }
@@ -62,6 +70,7 @@ elemTerm:
     | TRUE           {True        }
     | FALSE          {False       }
     | ZERO           {Zero        }
+    | UNIT           {Unit       }
 ;
 
 typeTerm:
@@ -70,6 +79,7 @@ typeTerm:
 ;
 
 typeTermElem:
-    BOOL                 {Bool}
-    | NAT                {Nat }
-    | LPAR typeTerm RPAR { $2 }
+    BOOL                 {Bool }
+    | UNIT               {TUnit}
+    | NAT                {Nat  }
+    | LPAR typeTerm RPAR {$2   }

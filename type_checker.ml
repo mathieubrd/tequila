@@ -7,6 +7,9 @@ exception Type_error of string ;;
 let type_of_term term =
   let rec aux ctx term =
     match term with
+    | Unit ->
+      TUnit
+
     | True ->
       Bool
 
@@ -70,10 +73,16 @@ let type_of_term term =
       let type_t1 = aux ctx t1 in
       let type_t2 = aux ctx t2 in
       (match type_t1 with
-      | TAbs (t11, t12) when t11 = type_t2 ->
-        t12
-      | _                                  ->
-        raise (Type_error (string_of_type_error type_t2 type_t1)))
+      | TAbs (t11, t12) when t11 = type_t2 -> t12
+      | _                                  -> raise (Type_error "Type Error"))
+
+    | Seq (t1, t2) ->
+      let type_t1 = aux ctx t1 in
+      let type_t2 = aux ctx t2 in
+      if type_t1 = TUnit then
+        type_t2
+      else
+        raise (Type_error (string_of_type_error type_t1 TUnit))
   in
 
   aux [] term

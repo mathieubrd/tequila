@@ -3,6 +3,9 @@ open Tools ;;
 
 let rec string_of_type term_type =
   match term_type with
+  | TUnit ->
+    "Unit"
+
   | Bool ->
     "Bool"
 
@@ -31,6 +34,9 @@ let string_of_numeric_val term =
 
 let rec string_of_term term =
   match term with
+    | Unit ->
+      "unit"
+
     | True ->
       "true"
 
@@ -59,15 +65,15 @@ let rec string_of_term term =
 
     | Abstraction (var, typ, t1) ->
       "λ" ^ var ^ " : " ^ string_of_type typ ^ ". " ^ string_of_term t1
-    
+
     | Application (Abstraction(var, typ, t1), t2) ->
       "(λ" ^ var ^ ": " ^ string_of_type typ ^ ". " ^ string_of_term t1 ^ ") " ^ string_of_term t2
-    
+
     | Application (t1, t2) ->
       "(" ^ string_of_term t1 ^ " " ^ string_of_term t2 ^ ")"
-    
+
     | Variable (var) -> var
-    
+
     | LetIn (var, t1, t2) ->
       "let " ^ var ^ " = " ^ string_of_term t1 ^ " in " ^ string_of_term t2
 
