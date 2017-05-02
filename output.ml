@@ -79,4 +79,7 @@ let rec string_of_term term =
 
     | Alias (var, t1) ->
       "val " ^ var ^ " = " ^ string_of_term t1
+
+    | Seq (t1, t2) ->
+      string_of_term t1 ^ " ; " ^ string_of_term t2
 ;;

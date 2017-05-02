@@ -26,10 +26,10 @@ type_checker.cmo:type_checker.ml
 	$(OCAMLC) -c type_checker.ml
 
 parser.ml:parser.mly
-	$(OCAMLYACC) parser.mly
+	$(OCAMLYACC) -v parser.mly
 
 parser.mli:parser.mly
-	$(OCAMLYACC) parser.mly
+	$(OCAMLYACC) -v parser.mly
 
 parser.cmi:parser.mli
 	$(OCAMLC) -c parser.mli

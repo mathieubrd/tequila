@@ -8,6 +8,9 @@ let substitute_aliases term =
     | Variable (var) when var = fst alias ->
       snd alias
 
+    | Seq (t1, t2) ->
+      Seq (aux t1 alias, aux t2 alias)
+
     | Abstraction (var, typ, t1) ->
       Abstraction (var, typ, aux t1 alias)
 
@@ -22,7 +25,7 @@ let substitute_aliases term =
 
     | Cond (t1, t2, t3) ->
       Cond (aux t1 alias, aux t2 alias, aux t3 alias)
-    
+
     | Succ (t1) ->
       Succ (aux t1 alias)
 
@@ -35,7 +38,7 @@ let substitute_aliases term =
     | _ ->
       term
   in
- 
+
   let rec loop aliases =
     match aliases with
     | [] -> term

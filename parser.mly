@@ -7,6 +7,7 @@
 %token          LAMBDA
 %token          COLON
 %token          DOT
+%token          COMMA
 %token <string> IDENT
 %token          LET
 %token          IN
@@ -15,6 +16,8 @@
 %token          SEQ
 %token          LPAR
 %token          RPAR
+%token          LBRACE
+%token          RBRACE
 %token          IF
 %token          THEN
 %token          ELSE
@@ -34,20 +37,20 @@
 
 %%
 
+
 main:
-    term END                   {$1            }
-    | LET IDENT EQUAL term END {Alias ($2, $4)}
+    LET IDENT EQUAL seq END {Alias ($2, $4)}
+    | seq END {$1}
 ;
+
+seq:
+    term {$1}
+    | seq SEQ term {Seq ($1, $3)}
 
 term:
     funcTerm           {$1                  }
     | appTerm funcTerm {Application ($1, $2)}
-    | seq {$1}
 ;
-
-seq:
-    term               {$1          }
-    | seq SEQ funcTerm {Seq ($1, $3)}
 
 appTerm:
     elemTerm           {$1                  }
@@ -66,7 +69,7 @@ funcTerm:
 
 elemTerm:
     IDENT            {Variable($1)}
-    | LPAR term RPAR {$2          }
+    | LPAR seq RPAR {$2          }
     | TRUE           {True        }
     | FALSE          {False       }
     | ZERO           {Zero        }
@@ -82,4 +85,4 @@ typeTermElem:
     BOOL                 {Bool }
     | UNIT               {TUnit}
     | NAT                {Nat  }
-    | LPAR typeTerm RPAR {$2   }
+    | LPAR typeTerm RPAR {$2 }

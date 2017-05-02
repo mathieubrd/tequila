@@ -25,6 +25,9 @@ let rec substitute x s term =
     | Cond (t1, t2, t3) ->
       Cond (substitute x s t1, substitute x s t2, substitute x s t3)
 
+    | Seq (t1, t2) ->
+      Seq (substitute x s t1, substitute x s t2)
+
     | _ -> term
 ;;
 

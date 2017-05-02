@@ -10,9 +10,12 @@ rule lexer = parse
     | "lambda"                 {LAMBDA      }
     | ":"                      {COLON       }
     | "."                      {DOT         }
+    | ","                      {COMMA       }
     | ";"                      {SEQ         }
     | "("                      {LPAR        }
     | ")"                      {RPAR        }
+    | "{"                      {LBRACE      }
+    | "}"                      {RBRACE      }
     | "if"                     {IF          }
     | "then"                   {THEN        }
     | "else"                   {ELSE        }
