@@ -4,6 +4,7 @@
 
 rule lexer = parse
     | [' ' '\t' '\n' ]         {lexer lexbuf}
+    | '#'[^'\n']*'\n'          {lexer lexbuf}
     | ";;"                     {END         }
     | "let"                    {LET         }
     | "in"                     {IN          }
