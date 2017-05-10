@@ -24,7 +24,8 @@ An expression is characterized by a term and is ending by `;;`
 There are 3 types:
 - Natural `Nat` ;
 - Boolean `Bool` ;
-- Application `T -> T`.
+- Application `T -> T` ;
+- `Unit`
 
 ## Functions
 A function that takes a natural and returns its successor:
@@ -62,4 +63,10 @@ The Let-in expression allows you to bind a variable to a term:
 ```
 > let x = 0 in (lambda a : nat. if iszero a then succ a else pred a) x ;;
 1 : Nat
+```
+
+## Sequence
+The sequence allows you to perform side effects like so:
+```
+> (lambda x : Nat. Unit) 0 ; succ 0
 ```
